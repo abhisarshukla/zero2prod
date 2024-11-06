@@ -1,0 +1,24 @@
+# .cargo/config.toml
+# On Windows
+# ```
+# cargo install-f cargo-binutils
+# rustup component add llvm-tools-preview
+# ```
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+[target.x86_64-pc-windows-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+#On Linux:
+#- Ubuntu, `sudoapt-getinstalllld clang`
+#- Arch, `sudo pacman-Slldclang`
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "linker=clang", "-C", "link-arg=-fuse-ld=lld"]
+
+# On MacOS, `brew install llvm` and `brew install lld`
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=/opt/homebrew/opt/lld/bin/ld64.lld"]
